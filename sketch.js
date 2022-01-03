@@ -22,10 +22,12 @@ function setup() {
 
 function draw() {
   background(bg);  
+  spaceCraft.addImage(noJet); 
+  if(!hasDocked) { 
+    spaceCraft.x = spaceCraft.x + random(-1,1); 
+    //spaceCraft.x = Math.round(random(50,750)); 
+    //spaceCraft.x = spaceCraft.x + random(-1,1); 
 
-  if(!hasDocked){
-    spaceCraft.x = Math.round(random(50,750));
-    spaceCraft.x = spaceCraft.x + random(-1,1);
     
     if(keyDown("LEFT_ARROW")){
       spaceCraft.addImage(leftJet);
@@ -48,13 +50,12 @@ function draw() {
      }
     
   }
-  
+  if(spaceCraft.y <= (iss.y+70) && spaceCraft.x <= (iss.x-10)){
+    hasDocked = true; 
+    textSize(25);
+    fill("white"); 
+    text("Docking Successful!", 200, 300); 
+  }
 
   drawSprites();
-}
-if(spaceCraft.y <= (iss.y+70) && spaceCraft.x <= (iss.x-10)){
-  hasDocked = true; 
-  textSize(25);
-  fill("white"); 
-  text("Docking Successful!", 200, 300); 
 }
